@@ -2,12 +2,13 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Home from '../Screen/Home';
+import RegistrasiKlaim1 from '../Screen/RegistrasiKlaim1';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Home: undefined;
-  Screen1: undefined;
-  Screen2: undefined;
-  Screen3: undefined;
+  RegistrasiKlaim1: undefined;
+  RegistrasiKlaim2: undefined;
+  RegistrasiKlaim3: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -17,6 +18,13 @@ const Navigator = () => {
     <NavigationContainer>
       <RootStack.Navigator initialRouteName="Home">
         <RootStack.Screen name="Home" component={Home} />
+        <RootStack.Screen
+          name="RegistrasiKlaim1"
+          component={RegistrasiKlaim1}
+          options={{
+            headerShown: false,
+          }}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
