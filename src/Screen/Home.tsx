@@ -1,6 +1,5 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import {RootStackParamList} from '../Components/Navigator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -22,7 +21,7 @@ const Home = ({navigation}: NavigationProps) => {
 
 const styles = StyleSheet.create({
   container: {flex: 1, alignItems: 'center', justifyContent: 'center'},
-  text: {color: '#000', fontSize: 20},
+  text: {color: '#fff', fontSize: 20},
   regKlaim: {
     backgroundColor: '#445ef2',
     padding: 10,

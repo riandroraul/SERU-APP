@@ -7,6 +7,8 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../Components/Navigator';
 import CardRegis from '../Components/CardRegis';
 import FormInputRegis from '../Components/FormInputRegis';
+import {ScrollView} from 'react-native';
+import BtnPrevAndNext from '../Components/BtnPrevAndNext';
 
 interface NavigationProps {
   navigation: NativeStackNavigationProp<RootStackParamList, 'RegistrasiKlaim1'>;
@@ -33,34 +35,39 @@ const RegistrasiKlaim1 = ({navigation}: NavigationProps) => {
         </TouchableOpacity>
         <Text style={styles.textHeader}>Registrasi Klaim</Text>
       </View>
-      <CustomCard
-        icon1={
-          <MaterialComunityIcons
-            name="book-edit-outline"
-            size={50}
-            color={'#000'}
-          />
-        }
-        icon2={
-          <MaterialComunityIcons
-            name="card-account-details-outline"
-            size={50}
-            color={'#000'}
-          />
-        }
-        title="Formulir Klaim"
-      />
-      <View style={styles.detailKlaim}>
-        <Text style={styles.detailKlaimText}>
-          Resgistrasi Klaim: B 1234 EFG
-        </Text>
-      </View>
-      <View style={styles.cardRegisWrapper}>
-        {data.map((item, index) => (
-          <CardRegis key={index} keyObj={item.key} value={item.value} />
-        ))}
-      </View>
-      <FormInputRegis />
+      <ScrollView indicatorStyle="white">
+        <CustomCard
+          icon1={
+            <MaterialComunityIcons
+              name="book-edit-outline"
+              size={50}
+              color={'#000'}
+            />
+          }
+          icon2={
+            <MaterialComunityIcons
+              name="card-account-details-outline"
+              size={50}
+              color={'#000'}
+            />
+          }
+          title="Formulir Klaim"
+        />
+        <View style={styles.detailKlaim}>
+          <Text style={styles.detailKlaimText}>
+            Resgistrasi Klaim: B 1234 EFG
+          </Text>
+        </View>
+        <View style={styles.cardRegisWrapper}>
+          {data.map((item, index) => (
+            <CardRegis key={index} keyObj={item.key} value={item.value} />
+          ))}
+        </View>
+        <FormInputRegis />
+        <BtnPrevAndNext
+          navigation={() => navigation.navigate('RegistrasiKlaim2')}
+        />
+      </ScrollView>
     </View>
   );
 };
@@ -68,7 +75,11 @@ const RegistrasiKlaim1 = ({navigation}: NavigationProps) => {
 const styles = StyleSheet.create({
   container: {padding: 23, flex: 1, backgroundColor: '#fff', gap: 10},
   text: {color: '#000'},
-  header: {flexDirection: 'row', gap: 10, alignItems: 'center'},
+  header: {
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'center',
+  },
   textHeader: {fontSize: 19, color: '#354187', fontWeight: 'bold'},
   detailKlaim: {backgroundColor: '#cfd2e8', padding: 5},
   detailKlaimText: {
