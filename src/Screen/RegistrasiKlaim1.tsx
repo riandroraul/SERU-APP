@@ -1,18 +1,14 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import CustomCard from '../Components/CustomCard';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import MaterialComunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../Components/Navigator';
 import CardRegis from '../Components/CardRegis';
 import FormInputRegis from '../Components/FormInputRegis';
 import {ScrollView} from 'react-native';
 import BtnPrevAndNext from '../Components/BtnPrevAndNext';
-
-interface NavigationProps {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'RegistrasiKlaim1'>;
-}
+import Container from '../Components/Container';
+import {NavigationProps} from '../types/types';
+import NavHeader from '../Components/NavHeader';
 
 const data = [
   {key: 'No. Polisi', value: 'B 1234 EFG'},
@@ -28,13 +24,8 @@ const data = [
 
 const RegistrasiKlaim1 = ({navigation}: NavigationProps) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesignIcon name="arrowleft" size={28} color={'#354187'} />
-        </TouchableOpacity>
-        <Text style={styles.textHeader}>Registrasi Klaim</Text>
-      </View>
+    <Container>
+      <NavHeader navigation={navigation} />
       <ScrollView indicatorStyle="white">
         <CustomCard
           icon1={
@@ -68,19 +59,13 @@ const RegistrasiKlaim1 = ({navigation}: NavigationProps) => {
           navigation={() => navigation.navigate('RegistrasiKlaim2')}
         />
       </ScrollView>
-    </View>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {padding: 23, flex: 1, backgroundColor: '#fff', gap: 10},
   text: {color: '#000'},
-  header: {
-    flexDirection: 'row',
-    gap: 10,
-    alignItems: 'center',
-  },
-  textHeader: {fontSize: 19, color: '#354187', fontWeight: 'bold'},
+
   detailKlaim: {backgroundColor: '#cfd2e8', padding: 5},
   detailKlaimText: {
     textAlign: 'center',
@@ -91,6 +76,7 @@ const styles = StyleSheet.create({
   cardRegisWrapper: {
     borderWidth: 0.4,
     padding: 15,
+    gap: 12,
     borderRadius: 5,
     marginVertical: 14,
   },

@@ -32,6 +32,9 @@ const Navigator = () => {
           <RootStack.Screen
             name="RegistrasiKlaim2"
             component={RegistrasiKlaim2}
+            options={{
+              headerShown: false,
+            }}
           />
           <RootStack.Screen
             name="RegistrasiKlaim3"

@@ -42,22 +42,22 @@ const FormInputRegis = () => {
 
   useEffect(() => {
     handleChangeDropdown('provinces', setProvinces);
-    if (selectedProvince !== null) {
+    if (selectedProvince) {
       console.log('selectedProvince: ', selectedProvince);
       handleChangeDropdown(`regencies/${selectedProvince.id}`, setRegencies);
       console.log('regencies: ', regencies);
       if (selectedRegency) {
         console.log('selectedRegency: ', selectedRegency);
         handleChangeDropdown(`districts/${selectedRegency.id}`, setDistricts);
-        console.log('districts: ', districts);
-        console.log('selectedDistrict: ', selectedDistrict);
         if (selectedDistrict) {
+          console.log('districts: ', districts);
+          console.log('selectedDistrict: ', selectedDistrict);
           handleChangeDropdown(`villages/${selectedDistrict.id}`, setVillages);
         }
       }
     }
     // console.log('hasown: ', data.hasOwnProperty('regencies'));
-  }, [selectedProvince, selectedRegency]);
+  }, [selectedProvince, selectedRegency, selectedDistrict]);
 
   const data2 = [
     {label: 'Item 1', value: '1'},
@@ -89,13 +89,13 @@ const FormInputRegis = () => {
         value={selectedProvince}
         onChange={(item: any) => {
           setSelectedProvince(item);
-          setData({...data, provinces: item.name});
+          setData({...data, province: item.name});
         }}
         search
         placeholder="Select Province"
         placeholderStyle={styles.placeholderStyle}
       />
-      {selectedProvince !== null && (
+      {selectedProvince && (
         <Dropdown
           style={styles.dropdown}
           data={regencies}
@@ -111,7 +111,7 @@ const FormInputRegis = () => {
           placeholderStyle={styles.placeholderStyle}
         />
       )}
-      {selectedRegency !== null && (
+      {selectedRegency && (
         <Dropdown
           style={styles.dropdown}
           data={districts}
@@ -127,7 +127,7 @@ const FormInputRegis = () => {
           placeholderStyle={styles.placeholderStyle}
         />
       )}
-      {selectedDistrict !== null && (
+      {selectedDistrict && (
         <Dropdown
           style={styles.dropdown}
           data={villages}

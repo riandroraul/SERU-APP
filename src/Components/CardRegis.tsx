@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   wrapKey: {flex: 0.9},
   textKey: {fontSize: 15, color: '#354187', fontWeight: 'bold'},
   wrapValue: {flex: 1},
-  textValue: {fontSize: 15, color: '#000'},
+  textValue: {fontSize: 15, color: '#000', paddingLeft: 10},
 });
 
 export default CardRegis;
