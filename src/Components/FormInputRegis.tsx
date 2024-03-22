@@ -1,36 +1,63 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import TextInputComp from './TextInputComp';
 import {DataContext} from '../Context/DataContext';
 import {Dropdown} from 'react-native-element-dropdown';
 import axios from 'axios';
+import {SelectedProvinces, SelectedRegency} from '../types/types';
 
 const FormInputRegis = () => {
-  const {data, setData}: any = React.useContext(DataContext);
-  const [provinces, setProvinces] = React.useState([]);
-  const [regencies, setRegencies] = React.useState([]);
-  const [selectedProvince, setSelectedProvince]: any = React.useState({});
-  const [selectedRegencies, setSelectedRegencies] = React.useState({});
+  const {data, setData}: any = useContext(DataContext);
+  const [provinces, setProvinces] = useState([]);
+  const [regencies, setRegencies] = useState([]);
+  const [selectedProvince, setSelectedProvince] =
+    useState<SelectedProvinces | null>(null);
+  const [selectedRegency, setSelectedRegency] =
+    useState<SelectedRegency | null>(null);
+  const [districts, setDistricts] = useState([]);
+  const [selectedDistrict, setSelectedDistrict]: any = useState(null);
+  const [villages, setVillages] = useState([]);
+  const [selectedVillage, setSelectedVillage] = useState(null);
+
+  type CallBackFunction = Dispatch<SetStateAction<never[]>>;
+  async function handleChangeDropdown(
+    path: string,
+    callbackFunc: CallBackFunction,
+  ) {
+    try {
+      const result = await axios.get(
+        `https://www.emsifa.com/api-wilayah-indonesia/api/${path}.json`,
+      );
+      callbackFunc(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    axios
-      .get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
-      .then((res: any) => {
-        console.log(provinces.length);
-        setProvinces(res.data);
-      });
-    if (provinces.length !== 0) {
-      axios
-        .get(
-          `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${selectedProvince.id}.json`,
-        )
-        .then((res: any) => {
-          setRegencies(res.data);
-        })
-        .catch(err => console.log(err));
+    handleChangeDropdown('provinces', setProvinces);
+    if (selectedProvince !== null) {
+      console.log('selectedProvince: ', selectedProvince);
+      handleChangeDropdown(`regencies/${selectedProvince.id}`, setRegencies);
+      console.log('regencies: ', regencies);
+      if (selectedRegency) {
+        console.log('selectedRegency: ', selectedRegency);
+        handleChangeDropdown(`districts/${selectedRegency.id}`, setDistricts);
+        console.log('districts: ', districts);
+        console.log('selectedDistrict: ', selectedDistrict);
+        if (selectedDistrict) {
+          handleChangeDropdown(`villages/${selectedDistrict.id}`, setVillages);
+        }
+      }
     }
-    console.log(31, data.provinces);
-  }, []);
+    // console.log('hasown: ', data.hasOwnProperty('regencies'));
+  }, [selectedProvince, selectedRegency]);
 
   const data2 = [
     {label: 'Item 1', value: '1'},
@@ -68,93 +95,54 @@ const FormInputRegis = () => {
         placeholder="Select Province"
         placeholderStyle={styles.placeholderStyle}
       />
-      <Dropdown
-        style={styles.dropdown}
-        data={provinces}
-        labelField="name"
-        valueField="id"
-        value={selectedProvince}
-        onChange={(item: any) => {
-          setSelectedProvince(item);
-          setData({...data, provinces: item.name});
-        }}
-        search
-        placeholder="Select Province"
-        placeholderStyle={styles.placeholderStyle}
-      />
-      <Dropdown
-        style={styles.dropdown}
-        data={provinces}
-        labelField="name"
-        valueField="id"
-        value={selectedProvince}
-        onChange={(item: any) => {
-          setSelectedProvince(item);
-          setData({...data, provinces: item.name});
-        }}
-        search
-        placeholder="Select Province"
-        placeholderStyle={styles.placeholderStyle}
-      />
-      <Dropdown
-        style={styles.dropdown}
-        data={provinces}
-        labelField="name"
-        valueField="id"
-        value={selectedProvince}
-        onChange={(item: any) => {
-          setSelectedProvince(item);
-          setData({...data, provinces: item.name});
-        }}
-        search
-        placeholder="Select Province"
-        placeholderStyle={styles.placeholderStyle}
-      />
-      <Dropdown
-        style={styles.dropdown}
-        data={provinces}
-        labelField="name"
-        valueField="id"
-        value={selectedProvince}
-        onChange={(item: any) => {
-          setSelectedProvince(item);
-          setData({...data, provinces: item.name});
-        }}
-        search
-        placeholder="Select Province"
-        placeholderStyle={styles.placeholderStyle}
-      />
-      <Dropdown
-        style={styles.dropdown}
-        data={provinces}
-        labelField="name"
-        valueField="id"
-        value={selectedProvince}
-        onChange={(item: any) => {
-          setSelectedProvince(item);
-          setData({...data, provinces: item.name});
-        }}
-        search
-        placeholder="Select Province"
-        placeholderStyle={styles.placeholderStyle}
-      />
-      {/* {provinces && (
+      {selectedProvince !== null && (
         <Dropdown
           style={styles.dropdown}
           data={regencies}
           labelField="name"
           valueField="id"
-          value={selectedRegencies}
+          value={selectedRegency}
           onChange={(item: any) => {
-            console.log(item);
-            setSelectedRegencies(item);
-            setData({...data, provinces: item.name});
+            setSelectedRegency(item);
+            setData({...data, regency: item.name});
           }}
           search
-          placeholder="Select Regencies"
+          placeholder="Select Regencie"
           placeholderStyle={styles.placeholderStyle}
         />
-      )} */}
+      )}
+      {selectedRegency !== null && (
+        <Dropdown
+          style={styles.dropdown}
+          data={districts}
+          labelField="name"
+          valueField="id"
+          value={selectedDistrict}
+          onChange={(item: any) => {
+            setSelectedDistrict(item);
+            setData({...data, district: item.name});
+          }}
+          search
+          placeholder="Select District"
+          placeholderStyle={styles.placeholderStyle}
+        />
+      )}
+      {selectedDistrict !== null && (
+        <Dropdown
+          style={styles.dropdown}
+          data={villages}
+          labelField="name"
+          valueField="id"
+          value={selectedVillage}
+          onChange={(item: any) => {
+            setSelectedVillage(item);
+            setData({...data, village: item.name});
+          }}
+          search
+          placeholder="Select Village"
+          placeholderStyle={styles.placeholderStyle}
+        />
+      )}
     </View>
   );
 };
