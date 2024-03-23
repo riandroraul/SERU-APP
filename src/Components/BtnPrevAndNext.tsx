@@ -1,5 +1,4 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
 
 interface BtnPrevAndNextProps {
   navigation: () => void;

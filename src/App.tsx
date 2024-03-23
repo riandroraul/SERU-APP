@@ -5,8 +5,6 @@
  * @format
  */
 
-import React from 'react';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Navigator from './Components/Navigator';
 
 function App(): React.JSX.Element {

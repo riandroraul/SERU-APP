@@ -1,5 +1,5 @@
+import {useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
-import React from 'react';
 import {StyleSheet} from 'react-native';
 
 interface TextInputProps {
@@ -13,7 +13,7 @@ const TextInputComp = ({
   onChangeText,
   defaultValue,
 }: TextInputProps) => {
-  const [focus, setFocus] = React.useState(false);
+  const [focus, setFocus] = useState(false);
   return (
     <View>
       <TextInput

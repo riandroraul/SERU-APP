@@ -1,11 +1,5 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {Dispatch, SetStateAction, useContext, useEffect, useState} from 'react';
 import TextInputComp from './TextInputComp';
 import {DataContext} from '../Context/DataContext';
 import {Dropdown} from 'react-native-element-dropdown';

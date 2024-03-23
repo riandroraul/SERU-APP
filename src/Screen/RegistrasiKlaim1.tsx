@@ -1,5 +1,4 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import React from 'react';
 import CustomCard from '../Components/CustomCard';
 import MaterialComunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CardRegis from '../Components/CardRegis';

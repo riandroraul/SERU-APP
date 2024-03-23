@@ -1,11 +1,13 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import Container from '../Components/Container';
+import NavHeader from '../Components/NavHeader';
+import {NavigationProps} from '../types/types';
 
-const RegistrasiKlaim3 = () => {
+const RegistrasiKlaim3 = ({navigation}: NavigationProps) => {
   return (
-    <View>
-      <Text>RegistrasiKlaim3</Text>
-    </View>
+    <Container>
+      <NavHeader navigation={navigation} />
+    </Container>
   );
 };
 

@@ -1,5 +1,4 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import React from 'react';
 import {NavigationProps} from '../types/types';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 

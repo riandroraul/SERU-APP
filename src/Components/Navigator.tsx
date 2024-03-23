@@ -39,6 +39,9 @@ const Navigator = () => {
           <RootStack.Screen
             name="RegistrasiKlaim3"
             component={RegistrasiKlaim3}
+            options={{
+              headerShown: false,
+            }}
           />
         </RootStack.Navigator>
       </DataProvider>

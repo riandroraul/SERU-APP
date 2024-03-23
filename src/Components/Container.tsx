@@ -10,6 +10,14 @@ const Container = ({children}: ContainerProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {padding: 23, flex: 1, backgroundColor: '#fff', gap: 10},
+  container: {
+    paddingLeft: 23,
+    paddingTop: 23,
+    paddingRight: 23,
+    flex: 1,
+    backgroundColor: '#fff',
+    gap: 10,
+    marginBottom: 15,
+  },
 });
 export default Container;
